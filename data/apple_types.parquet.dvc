@@ -1,0 +1,5 @@
+outs:
+- md5: ad9412f91526c3fa039030b592d4519c
+  size: 1908
+  hash: md5
+  path: apple_types.parquet

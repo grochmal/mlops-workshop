@@ -1,0 +1,24 @@
+stages:
+  buy_apples:
+    cmd: python honeycrisp/buy_apples.py passionate_cabbage data/emails.parquet data/apple_types.parquet
+      data/rejected_mail.parquet data/apples_in_basement.parquet --run-name the-green
+    deps:
+    - data/apple_types.parquet
+    - data/emails.parquet
+    outs:
+    - data/apples_in_basement.parquet
+    - data/rejected_mail.parquet
+  make_labels:
+    cmd: python honeycrisp/make_labels.py passionate_cabbage data/apples_in_basement.parquet
+      data/bottle_labels_embedded.parquet --run-name the-green
+    deps:
+    - data/apples_in_basement.parquet
+    outs:
+    - data/bottle_labels_embedded.parquet
+  print_graph:
+    cmd: python honeycrisp/print_graph.py passionate_cabbage data/bottle_labels_embedded.parquet
+      data/graph.png --run-name the-green
+    deps:
+    - data/bottle_labels_embedded.parquet
+    outs:
+    - data/graph.png

@@ -1,0 +1,49 @@
+schema: '2.0'
+stages:
+  buy_apples:
+    cmd: python honeycrisp/buy_apples.py passionate_cabbage data/emails.parquet data/apple_types.parquet
+      data/rejected_mail.parquet data/apples_in_basement.parquet --run-name the-green
+    deps:
+    - path: data/apple_types.parquet
+      hash: md5
+      md5: ad9412f91526c3fa039030b592d4519c
+      size: 1908
+    - path: data/emails.parquet
+      hash: md5
+      md5: 68fd1c583868e2731d4aa0eaf98453d4
+      size: 2648
+    outs:
+    - path: data/apples_in_basement.parquet
+      hash: md5
+      md5: 6d257a57d4bca0721cfeea8ded8862a1
+      size: 1957
+    - path: data/rejected_mail.parquet
+      hash: md5
+      md5: 4366d5e71166a13bdcbe35213428d520
+      size: 1907
+  make_labels:
+    cmd: python honeycrisp/make_labels.py passionate_cabbage data/apples_in_basement.parquet
+      data/bottle_labels_embedded.parquet --run-name the-green
+    deps:
+    - path: data/apples_in_basement.parquet
+      hash: md5
+      md5: 6d257a57d4bca0721cfeea8ded8862a1
+      size: 1957
+    outs:
+    - path: data/bottle_labels_embedded.parquet
+      hash: md5
+      md5: 6401668f26863b2892bc94308a8bfe38
+      size: 89515
+  print_graph:
+    cmd: python honeycrisp/print_graph.py passionate_cabbage data/bottle_labels_embedded.parquet
+      data/graph.png --run-name the-green
+    deps:
+    - path: data/bottle_labels_embedded.parquet
+      hash: md5
+      md5: 6401668f26863b2892bc94308a8bfe38
+      size: 89515
+    outs:
+    - path: data/graph.png
+      hash: md5
+      md5: 9e1f522848f0bfb8a2bda98fa6968db0
+      size: 44554

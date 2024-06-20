@@ -55,6 +55,9 @@ cover/
 # pdm
 .pdm-python
 
+# dvc
+.dvcstore
+
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
 __pypackages__/
 
